@@ -1,0 +1,27 @@
+{
+  "guildId": "1429026875946172459",
+  "clientId": "1430219756820103370",
+  "devs": [],
+  "serverConfig": {
+    "welcomeChannel": "1429027697304277173",
+    "botCommandsChannel": "1429028988109455454",
+    "modLogChannel": "1430931334213406731",
+    "introductionsChannel": "1450859866334695517",
+    "emojis": {
+      "welcomeEmoji": "1429031070665539664"
+    },
+    "countingChannel": "1433142662978080909",
+    "suggestionsChannel": "1441645690727039026",
+    "starboardChannel": "1457370021700309083",
+    "ticketCategory": "1431492565760348281",
+    "ticketChannel": "1442927451251544236",
+    "moderatorRoleId": "1441833991798788126",
+    "suspendedRoleId": "1454465284982177863",
+    "rulesChannel": "1429027865957109861",
+    "warnRoles": {
+      "warn1": "1443215201490042961",
+      "warn2": "1443215226681168015",
+      "warn3": "1443215253423784100"
+    }
+  }
+}
