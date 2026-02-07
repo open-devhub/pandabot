@@ -4,8 +4,8 @@ const {
   ApplicationCommandOptionType,
   PermissionFlagsBits,
   EmbedBuilder,
-} = require('discord.js');
-const { serverConfig } = require('../../../config.json');
+} = require("discord.js");
+const { serverConfig } = require("../../../config.json");
 
 module.exports = {
   /**
@@ -14,20 +14,20 @@ module.exports = {
    */
   callback: async (client, interaction) => {
     // resolve target member robustly
-    const optMember = interaction.options.getMember('target-user');
-    const optUser = interaction.options.getUser('target-user');
+    const optMember = interaction.options.getMember("target-user");
+    const optUser = interaction.options.getUser("target-user");
     let targetUser = optMember;
 
     if (!targetUser && optUser) {
       try {
         targetUser = await interaction.guild.members.fetch(optUser.id);
       } catch (err) {
-        console.error('Failed to fetch member:', err);
+        console.error("Failed to fetch member:", err);
       }
     }
 
     const reason =
-      interaction.options.getString('reason') || 'No reason provided';
+      interaction.options.getString("reason") || "No reason provided";
 
     await interaction.deferReply({ ephemeral: true });
 
@@ -61,16 +61,16 @@ module.exports = {
       await targetUser.kick(reason);
 
       const embed = new EmbedBuilder()
-        .setTitle('Kicked User')
+        .setTitle("Kicked User")
         .setColor(0x5865f2)
         .addFields(
-          { name: 'User', value: targetUser.toString(), inline: true },
+          { name: "User", value: targetUser.toString(), inline: true },
           {
-            name: 'Moderator',
+            name: "Moderator",
             value: interaction.user.toString(),
             inline: true,
           },
-          { name: 'Reason', value: reason },
+          { name: "Reason", value: reason },
         )
         .setThumbnail(targetUser.user.displayAvatarURL({ size: 1024 }))
         .setTimestamp();
@@ -83,7 +83,7 @@ module.exports = {
         await logChannel.send({ embeds: [embed] });
       } else {
         console.warn(
-          'Log channel not found, sending embed in current channel.',
+          "Log channel not found, sending embed in current channel.",
         );
         await interaction.channel.send({ embeds: [embed] });
       }
@@ -94,23 +94,23 @@ module.exports = {
     } catch (error) {
       console.error(`There was an error when kicking: ${error}`);
       await interaction.editReply({
-        content: '❌ An error occurred while kicking the user.',
+        content: "❌ An error occurred while kicking the user.",
       });
     }
   },
 
-  name: 'kick',
-  description: 'Kicks a member from this server.',
+  name: "kick",
+  description: "Kicks a member from this server.",
   options: [
     {
-      name: 'target-user',
-      description: 'The user you want to kick.',
+      name: "target-user",
+      description: "The user you want to kick.",
       type: ApplicationCommandOptionType.Mentionable,
       required: true,
     },
     {
-      name: 'reason',
-      description: 'The reason you want to kick.',
+      name: "reason",
+      description: "The reason you want to kick.",
       type: ApplicationCommandOptionType.String,
       required: true,
     },

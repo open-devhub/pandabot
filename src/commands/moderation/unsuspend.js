@@ -4,9 +4,9 @@ const {
   ApplicationCommandOptionType,
   PermissionFlagsBits,
   EmbedBuilder,
-} = require('discord.js');
-const { serverConfig } = require('../../../config.json');
-const { deleteDocument, getDocument } = require('../../utils/firestore');
+} = require("discord.js");
+const { serverConfig } = require("../../../config.json");
+const { deleteDocument, getDocument } = require("../../utils/firestore");
 
 module.exports = {
   /**
@@ -14,11 +14,11 @@ module.exports = {
    * @param {Interaction} interaction
    */
   callback: async (client, interaction) => {
-    const optMember = interaction.options.getMember('target-user');
+    const optMember = interaction.options.getMember("target-user");
     const reason =
-      interaction.options.getString('reason') || 'No reason provided';
+      interaction.options.getString("reason") || "No reason provided";
     const suspendedRole = interaction.guild.roles.cache.get(
-      serverConfig.suspendedRoleId
+      serverConfig.suspendedRoleId,
     );
     await interaction.deferReply({ ephemeral: true });
 
@@ -27,7 +27,7 @@ module.exports = {
     }
 
     if (!optMember.roles.cache.has(suspendedRole.id)) {
-      return interaction.editReply('This user is not suspended.');
+      return interaction.editReply("This user is not suspended.");
     }
 
     const targetUserRolePosition = optMember.roles.highest.position;
@@ -35,56 +35,56 @@ module.exports = {
     const botRolePosition = interaction.guild.members.me.roles.highest.position;
     if (targetUserRolePosition >= requestUserRolePosition) {
       return interaction.editReply(
-        "You can't unsuspend that user because they have the same/higher role than you."
+        "You can't unsuspend that user because they have the same/higher role than you.",
       );
     }
     if (targetUserRolePosition >= botRolePosition) {
       return interaction.editReply(
-        "I can't suspend that user because they have the same/higher role than me."
+        "I can't suspend that user because they have the same/higher role than me.",
       );
     }
     try {
       await optMember.roles.remove(suspendedRole, `Unsuspended: ${reason}`);
     } catch (error) {
-      console.error('Error suspending user:', error);
+      console.error("Error suspending user:", error);
       return interaction.editReply(
-        'There was an error unsuspending that user. Please try again.'
+        "There was an error unsuspending that user. Please try again.",
       );
     }
     // get current suspensions from firestore from suspensions collection
-    const suspensionDoc = await getDocument('suspensions', optMember.id);
+    const suspensionDoc = await getDocument("suspensions", optMember.id);
 
     if (suspensionDoc.exists()) {
-      await deleteDocument('suspensions', optMember.id);
+      await deleteDocument("suspensions", optMember.id);
     }
 
     const embed = new EmbedBuilder()
-      .setTitle('User Unsuspended')
+      .setTitle("User Unsuspended")
       .setColor(0x5865f2)
       .addFields(
         {
-          name: 'Unsuspended User',
+          name: "Unsuspended User",
           value: `${optMember.user}`,
           inline: true,
         },
         {
-          name: 'Moderator',
+          name: "Moderator",
           value: `${interaction.user}`,
           inline: true,
         },
-        { name: 'Reason', value: reason, inline: false }
+        { name: "Reason", value: reason, inline: false },
       )
       .setThumbnail(optMember.user.displayAvatarURL({ size: 1024 }))
       .setTimestamp();
 
     const logChannel = interaction.guild.channels.cache.get(
-      serverConfig.botCommandsChannel
+      serverConfig.botCommandsChannel,
     );
 
     if (logChannel) {
       await logChannel.send({ embeds: [embed] });
     } else {
-      console.warn('Log channel not found, sending embed in current channel.');
+      console.warn("Log channel not found, sending embed in current channel.");
       await interaction.channel.send({ embeds: [embed] });
     }
 
@@ -92,18 +92,18 @@ module.exports = {
       content: `✅ Successfully Unsuspended **${optMember.user.tag}**`,
     });
   },
-  name: 'unsuspend',
-  description: 'Unsuspend a user from the server.',
+  name: "unsuspend",
+  description: "Unsuspend a user from the server.",
   options: [
     {
-      name: 'target-user',
-      description: 'The user you want to unsuspend.',
+      name: "target-user",
+      description: "The user you want to unsuspend.",
       type: ApplicationCommandOptionType.Mentionable,
       required: true,
     },
     {
-      name: 'reason',
-      description: 'The reason you want to unsuspend.',
+      name: "reason",
+      description: "The reason you want to unsuspend.",
       type: ApplicationCommandOptionType.String,
       required: true,
     },

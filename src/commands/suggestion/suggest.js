@@ -1,5 +1,5 @@
-const { serverConfig } = require('../../../config.json');
-const { ApplicationCommandOptionType, EmbedBuilder } = require('discord.js');
+const { serverConfig } = require("../../../config.json");
+const { ApplicationCommandOptionType, EmbedBuilder } = require("discord.js");
 
 module.exports = {
   /**
@@ -10,20 +10,20 @@ module.exports = {
   callback: async (client, interaction) => {
     if (!interaction.inGuild()) {
       return interaction.reply({
-        content: 'You can only run this command inside a server.',
+        content: "You can only run this command inside a server.",
         ephemeral: true,
       });
     }
 
-    const suggestion = interaction.options.getString('suggestion');
-    const image = interaction.options.getAttachment('image');
+    const suggestion = interaction.options.getString("suggestion");
+    const image = interaction.options.getAttachment("image");
 
     const suggestionsChannel = interaction.guild.channels.cache.get(
       serverConfig.suggestionsChannel,
     );
     if (!suggestionsChannel) {
       return interaction.reply({
-        content: 'Suggestions channel is not configured yet.',
+        content: "Suggestions channel is not configured yet.",
         ephemeral: true,
       });
     }
@@ -47,9 +47,9 @@ module.exports = {
     const sent = await suggestionsChannel.send({ embeds: [suggestionEmbed] });
 
     try {
-      await sent.react('👍');
-      await sent.react('👎');
-      await sent.react('🤷');
+      await sent.react("👍");
+      await sent.react("👎");
+      await sent.react("🤷");
     } catch (e) {
       // ignore
     }
@@ -64,18 +64,18 @@ module.exports = {
       ephemeral: true,
     });
   },
-  name: 'suggest',
-  description: 'Make a suggestion for the server!',
+  name: "suggest",
+  description: "Make a suggestion for the server!",
   options: [
     {
-      name: 'suggestion',
-      description: 'The suggestion you want to make',
+      name: "suggestion",
+      description: "The suggestion you want to make",
       type: ApplicationCommandOptionType.String,
       required: true,
     },
     {
-      name: 'image',
-      description: 'Optional image attachment for the suggestion',
+      name: "image",
+      description: "Optional image attachment for the suggestion",
       type: ApplicationCommandOptionType.Attachment,
       required: false,
     },

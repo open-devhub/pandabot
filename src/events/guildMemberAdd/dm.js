@@ -2,7 +2,7 @@ module.exports = async (client, member) => {
   if (!member || !member.id) return;
 
   try {
-    const guildName = member.guild?.name || 'the server';
+    const guildName = member.guild?.name || "the server";
     const mention = member.user?.toString() || `<@${member.id}>`;
 
     const dmContent = `Hello ${mention}, 👋  
@@ -30,6 +30,6 @@ Welcome aboard — we’re excited to build and grow together 🚀
       else console.warn(msg);
     });
   } catch (err) {
-    console.error('Error sending welcome DM on guildMemberAdd:', err);
+    console.error("Error sending welcome DM on guildMemberAdd:", err);
   }
 };

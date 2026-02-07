@@ -1,8 +1,8 @@
-const fs = require('fs');
-const path = require('path');
-const { EmbedBuilder, PermissionsBitField } = require('discord.js');
-const { serverConfig } = require('../../../config.json');
-const { createDocument, getDocument } = require('../../utils/firestore');
+const fs = require("fs");
+const path = require("path");
+const { EmbedBuilder, PermissionsBitField } = require("discord.js");
+const { serverConfig } = require("../../../config.json");
+const { createDocument, getDocument } = require("../../utils/firestore");
 
 const BASE_TIMEOUT_MINUTES = 30;
 const BLOCK_LIMIT = 3;
@@ -15,8 +15,8 @@ const modPingCooldowns = new Map();
 let lastModPingClear = Date.now();
 
 function wildcardToRegex(word) {
-  const escaped = word.replace(/[.+?^${}()|[\]\\]/g, '\\$&');
-  return new RegExp(escaped.replace(/\*/g, '.*'), 'i');
+  const escaped = word.replace(/[.+?^${}()|[\]\\]/g, "\\$&");
+  return new RegExp(escaped.replace(/\*/g, ".*"), "i");
 }
 
 module.exports = async (client, message) => {
@@ -31,18 +31,18 @@ module.exports = async (client, message) => {
     const me = message.guild.members.me;
     if (!me.permissions.has(PermissionsBitField.Flags.ModerateMembers)) return;
 
-    const filePath = path.join(__dirname, '../../data/blacklist.txt');
+    const filePath = path.join(__dirname, "../../data/blacklist.txt");
 
     const patterns = fs
-      .readFileSync(filePath, 'utf8')
-      .split('\n')
+      .readFileSync(filePath, "utf8")
+      .split("\n")
       .map((w) => w.trim())
       .filter(Boolean)
       .map(wildcardToRegex);
 
     const words = message.content
       .toLowerCase()
-      .replace(/[^a-z0-9\s]/gi, ' ')
+      .replace(/[^a-z0-9\s]/gi, " ")
       .split(/\s+/);
 
     let count = 0;
@@ -67,7 +67,7 @@ module.exports = async (client, message) => {
     const member = await message.guild.members.fetch(message.author.id);
 
     if (count >= BLOCK_LIMIT || userWarnings.length >= 3) {
-      const warnDoc = await getDocument('warns', member.id);
+      const warnDoc = await getDocument("warns", member.id);
       const warns = warnDoc.exists() ? warnDoc.data().warns || [] : [];
       const durationMinutes =
         warns.length > 0
@@ -79,21 +79,21 @@ module.exports = async (client, message) => {
         await member.timeout(timeoutDuration, `Repeated use of blocked words`);
       }
 
-      const { default: prettyMs } = await import('pretty-ms');
+      const { default: prettyMs } = await import("pretty-ms");
 
       const embed = new EmbedBuilder()
-        .setTitle('Timeout Applied')
+        .setTitle("Timeout Applied")
         .setColor(0x5865f2)
         .addFields(
-          { name: 'User', value: member.toString(), inline: true },
-          { name: 'Moderator', value: client.user.toString(), inline: true },
+          { name: "User", value: member.toString(), inline: true },
+          { name: "Moderator", value: client.user.toString(), inline: true },
           {
-            name: 'Duration',
+            name: "Duration",
             value: prettyMs(timeoutDuration),
             inline: true,
           },
           {
-            name: 'Reason',
+            name: "Reason",
             value: `Repeated use of blocked words`,
           },
         )
@@ -137,14 +137,14 @@ module.exports = async (client, message) => {
         warnLevel = 3;
       }
 
-      const warnDoc = await getDocument('warns', member.id);
+      const warnDoc = await getDocument("warns", member.id);
       let warns = warnDoc.exists() ? warnDoc.data().warns || [] : [];
       warns.push({
         moderatorId: client.user.id,
-        reason: 'Used blocked words',
+        reason: "Used blocked words",
       });
       if (warns.length > 3) warns = warns.slice(-3);
-      await createDocument('warns', member.id, { warns });
+      await createDocument("warns", member.id, { warns });
 
       await message.channel.send(
         `⚠️ ${message.author}, your message contained blocked words and was removed. This incident will be reported to the staff team`,
@@ -156,13 +156,13 @@ module.exports = async (client, message) => {
 
       if (logChannel) {
         const embed = new EmbedBuilder()
-          .setTitle('Warn User')
+          .setTitle("Warn User")
           .setColor(0xff0000)
           .addFields(
-            { name: 'User', value: `${member}`, inline: true },
-            { name: 'Moderator', value: `${client.user}`, inline: true },
-            { name: 'Warning Count', value: `${warnLevel}`, inline: true },
-            { name: 'Reason', value: 'Used blocked words' },
+            { name: "User", value: `${member}`, inline: true },
+            { name: "Moderator", value: `${client.user}`, inline: true },
+            { name: "Warning Count", value: `${warnLevel}`, inline: true },
+            { name: "Reason", value: "Used blocked words" },
           )
           .setThumbnail(member.user.displayAvatarURL({ size: 1024 }))
           .setTimestamp();
@@ -175,14 +175,14 @@ module.exports = async (client, message) => {
 
       if (modLogChannel) {
         const embed = new EmbedBuilder()
-          .setTitle('Blocked Words Detected')
+          .setTitle("Blocked Words Detected")
           .setColor(0xff0000)
           .addFields(
-            { name: 'User', value: `${member}`, inline: true },
-            { name: 'Channel', value: `${message.channel}`, inline: true },
-            { name: 'Blocked Words Count', value: `${count}`, inline: true },
-            { name: 'Warning Count', value: `${warnLevel}`, inline: true },
-            { name: 'Message', value: `||${message.content}||`, inline: false },
+            { name: "User", value: `${member}`, inline: true },
+            { name: "Channel", value: `${message.channel}`, inline: true },
+            { name: "Blocked Words Count", value: `${count}`, inline: true },
+            { name: "Warning Count", value: `${warnLevel}`, inline: true },
+            { name: "Message", value: `||${message.content}||`, inline: false },
           )
           .setThumbnail(member.user.displayAvatarURL({ size: 1024 }))
           .setTimestamp();
@@ -201,6 +201,6 @@ module.exports = async (client, message) => {
       }
     }
   } catch (err) {
-    console.error('BlockWords Error:', err);
+    console.error("BlockWords Error:", err);
   }
 };

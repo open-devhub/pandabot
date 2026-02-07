@@ -1,9 +1,9 @@
-const { EmbedBuilder } = require('discord.js');
-const { serverConfig } = require('../../../config.json');
+const { EmbedBuilder } = require("discord.js");
+const { serverConfig } = require("../../../config.json");
 
 module.exports = {
-  name: 'ticketinfo',
-  description: 'Provides information about tickets.',
+  name: "ticketinfo",
+  description: "Provides information about tickets.",
   /**
    *
    * @param {Client} client
@@ -21,7 +21,7 @@ module.exports = {
 To open a ticket, go to <#${ticketChannelId}> and use the dropdown menu to select your ticket type. You’ll be guided through a simple form to explain your reason. I will handle the process, create a private channel for your case, and keep everything neat and secure. Thanks for helping us keep the community clean ✨`;
 
     const embed = new EmbedBuilder()
-      .setTitle('📘 Ticket Guide')
+      .setTitle("📘 Ticket Guide")
       .setDescription(ticketInfo.trim())
       .setColor(0x5865f2)
       .setFooter({

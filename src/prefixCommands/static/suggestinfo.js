@@ -1,9 +1,9 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
-  name: 'suggestinfo',
-  description: 'Provides information about /suggest command.',
-  aliases: ['suggestioninfo'],
+  name: "suggestinfo",
+  description: "Provides information about /suggest command.",
+  aliases: ["suggestioninfo"],
   callback: (client, message, args) => {
     try {
       const suggestionInfo = `Use the \`/suggest\` command anywhere in the server to share ideas or improvements with the community.
@@ -32,7 +32,7 @@ module.exports = {
 `;
 
       const embed = new EmbedBuilder()
-        .setTitle('📘 Suggestion Guide')
+        .setTitle("📘 Suggestion Guide")
         .setDescription(suggestionInfo.trim())
         .setColor(0x5865f2)
         .setFooter({

@@ -1,8 +1,8 @@
-const fs = require('fs');
-const path = require('path');
-const { EmbedBuilder, PermissionsBitField } = require('discord.js');
-const { serverConfig } = require('../../../config.json');
-const { createDocument, getDocument } = require('../../utils/firestore');
+const fs = require("fs");
+const path = require("path");
+const { EmbedBuilder, PermissionsBitField } = require("discord.js");
+const { serverConfig } = require("../../../config.json");
+const { createDocument, getDocument } = require("../../utils/firestore");
 
 const BASE_TIMEOUT_MINUTES = 30;
 const BLOCK_LIMIT = 3;
@@ -31,15 +31,15 @@ module.exports = async (client, message) => {
     const me = message.guild.members.me;
     if (!me.permissions.has(PermissionsBitField.Flags.ModerateMembers)) return;
 
-    const filePath = path.join(__dirname, '../../data/blocked_links.txt');
+    const filePath = path.join(__dirname, "../../data/blocked_links.txt");
 
     const blockedLinks = fs
-      .readFileSync(filePath, 'utf8')
-      .split('\n')
+      .readFileSync(filePath, "utf8")
+      .split("\n")
       .map((l) => l.trim().toLowerCase())
       .filter(Boolean);
 
-    const content = message.content.toLowerCase().replace(/\s+/g, '');
+    const content = message.content.toLowerCase().replace(/\s+/g, "");
 
     let count = 0;
     for (const link of blockedLinks) {
@@ -63,7 +63,7 @@ module.exports = async (client, message) => {
     const member = await message.guild.members.fetch(message.author.id);
 
     if (count >= BLOCK_LIMIT || userWarnings.length >= 3) {
-      const warnDoc = await getDocument('warns', member.id);
+      const warnDoc = await getDocument("warns", member.id);
       const warns = warnDoc.exists() ? warnDoc.data().warns || [] : [];
       const durationMinutes =
         warns.length > 0
@@ -75,21 +75,21 @@ module.exports = async (client, message) => {
         await member.timeout(timeoutDuration, `Repeated use of blocked links`);
       }
 
-      const { default: prettyMs } = await import('pretty-ms');
+      const { default: prettyMs } = await import("pretty-ms");
 
       const embed = new EmbedBuilder()
-        .setTitle('Timeout Applied')
+        .setTitle("Timeout Applied")
         .setColor(0x5865f2)
         .addFields(
-          { name: 'User', value: member.toString(), inline: true },
-          { name: 'Moderator', value: client.user.toString(), inline: true },
+          { name: "User", value: member.toString(), inline: true },
+          { name: "Moderator", value: client.user.toString(), inline: true },
           {
-            name: 'Duration',
+            name: "Duration",
             value: prettyMs(timeoutDuration),
             inline: true,
           },
           {
-            name: 'Reason',
+            name: "Reason",
             value: `Repeated use of blocked links`,
           },
         )
@@ -133,14 +133,14 @@ module.exports = async (client, message) => {
         warnLevel = 3;
       }
 
-      const warnDoc = await getDocument('warns', member.id);
+      const warnDoc = await getDocument("warns", member.id);
       let warns = warnDoc.exists() ? warnDoc.data().warns || [] : [];
       warns.push({
         moderatorId: client.user.id,
-        reason: 'Advertising link',
+        reason: "Advertising link",
       });
       if (warns.length > 3) warns = warns.slice(-3);
-      await createDocument('warns', member.id, { warns });
+      await createDocument("warns", member.id, { warns });
 
       await message.channel.send(
         `⚠️ ${message.author}, advertising links are not allowed. This incident will be reported to the staff team`,
@@ -152,13 +152,13 @@ module.exports = async (client, message) => {
 
       if (logChannel) {
         const embed = new EmbedBuilder()
-          .setTitle('Warn User')
+          .setTitle("Warn User")
           .setColor(0xff0000)
           .addFields(
-            { name: 'User', value: `${member}`, inline: true },
-            { name: 'Moderator', value: `${client.user}`, inline: true },
-            { name: 'Warning Count', value: `${warnLevel}`, inline: true },
-            { name: 'Reason', value: 'Advertising link' },
+            { name: "User", value: `${member}`, inline: true },
+            { name: "Moderator", value: `${client.user}`, inline: true },
+            { name: "Warning Count", value: `${warnLevel}`, inline: true },
+            { name: "Reason", value: "Advertising link" },
           )
           .setThumbnail(member.user.displayAvatarURL({ size: 1024 }))
           .setTimestamp();
@@ -171,14 +171,14 @@ module.exports = async (client, message) => {
 
       if (modLogChannel) {
         const embed = new EmbedBuilder()
-          .setTitle('Blocked Link Detected')
+          .setTitle("Blocked Link Detected")
           .setColor(0xff0000)
           .addFields(
-            { name: 'User', value: `${member}`, inline: true },
-            { name: 'Channel', value: `${message.channel}`, inline: true },
-            { name: 'Blocked Links Count', value: `${count}`, inline: true },
-            { name: 'Warning Count', value: `${warnLevel}`, inline: true },
-            { name: 'Message', value: `||${message.content}||`, inline: false },
+            { name: "User", value: `${member}`, inline: true },
+            { name: "Channel", value: `${message.channel}`, inline: true },
+            { name: "Blocked Links Count", value: `${count}`, inline: true },
+            { name: "Warning Count", value: `${warnLevel}`, inline: true },
+            { name: "Message", value: `||${message.content}||`, inline: false },
           )
           .setThumbnail(member.user.displayAvatarURL({ size: 1024 }))
           .setTimestamp();
@@ -197,6 +197,6 @@ module.exports = async (client, message) => {
       }
     }
   } catch (err) {
-    console.error('Block Links Error:', err);
+    console.error("Block Links Error:", err);
   }
 };

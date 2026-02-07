@@ -1,5 +1,5 @@
-const { serverConfig } = require('../../../config.json');
-const { counts } = require('../../states/counting');
+const { serverConfig } = require("../../../config.json");
+const { counts } = require("../../states/counting");
 
 module.exports = async (client, message) => {
   try {
@@ -20,12 +20,12 @@ module.exports = async (client, message) => {
       num = parseInt(content, 10);
     } else if (/^[0-9+\-*/().%\s^]+$/.test(content)) {
       try {
-        const safeExpr = content.replace(/\^/g, '**');
-        if (/([+\-*/%^]{2,})/.test(safeExpr.replace(/\s+/g, ''))) return;
+        const safeExpr = content.replace(/\^/g, "**");
+        if (/([+\-*/%^]{2,})/.test(safeExpr.replace(/\s+/g, ""))) return;
 
         const res = Function(`"use strict"; return (${safeExpr})`)();
         if (
-          typeof res === 'number' &&
+          typeof res === "number" &&
           Number.isFinite(res) &&
           Number.isInteger(res)
         ) {
@@ -41,7 +41,7 @@ module.exports = async (client, message) => {
     }
 
     const state = counts.get(key) || { lastNum: 0, lastUser: null, saves: 3 };
-    if (typeof state.saves !== 'number' || state.saves < 0) state.saves = 3;
+    if (typeof state.saves !== "number" || state.saves < 0) state.saves = 3;
 
     if (state.lastNum === 0) {
       if (num === 1) {
@@ -51,7 +51,7 @@ module.exports = async (client, message) => {
           saves: state.saves,
         });
         try {
-          await message.react('✅');
+          await message.react("✅");
         } catch {}
         return;
       } else {
@@ -67,7 +67,7 @@ module.exports = async (client, message) => {
       await message.channel.send(
         `${message.author}, you can't count twice in a row.`,
       );
-      message.react('💢').catch(() => {});
+      message.react("💢").catch(() => {});
       return;
     }
 
@@ -82,49 +82,49 @@ module.exports = async (client, message) => {
       try {
         switch (num) {
           case 25:
-            await message.react('🌟');
+            await message.react("🌟");
             break;
           case 50:
-            await message.react('😎');
+            await message.react("😎");
             break;
           case 75:
-            await message.react('✨');
+            await message.react("✨");
             break;
           case 100:
-            await message.react('💯');
-            await message.react('🏆');
+            await message.react("💯");
+            await message.react("🏆");
             break;
           case 150:
-            await message.react('🎉');
+            await message.react("🎉");
             break;
           case 200:
-            await message.react('🥳');
+            await message.react("🥳");
             break;
           case 250:
-            await message.react('🚀');
+            await message.react("🚀");
             break;
           case 300:
-            await message.react('🌕');
+            await message.react("🌕");
             break;
           case 400:
-            await message.react('🎆');
+            await message.react("🎆");
             break;
           case 500:
-            await message.react('👑');
+            await message.react("👑");
             break;
           case 750:
-            await message.react('🤩');
+            await message.react("🤩");
             break;
           case 1000:
-            await message.react('🏅');
-            await message.react('🏆');
-            await message.react('🎉');
+            await message.react("🏅");
+            await message.react("🏆");
+            await message.react("🎉");
             await message.channel.send(
               `Incredible! We've reached **1000** counts! GGs! 🎉🏆`,
             );
             break;
           default:
-            await message.react('✅');
+            await message.react("✅");
         }
       } catch {}
       return;
@@ -137,7 +137,7 @@ module.exports = async (client, message) => {
         `${message.author}, wrong number — expected **${
           state.lastNum + 1
         }**. You have **${state.saves}** save${
-          state.saves === 1 ? '' : 's'
+          state.saves === 1 ? "" : "s"
         } left before the counter resets.`,
       );
       return;
@@ -148,9 +148,9 @@ module.exports = async (client, message) => {
     await message.channel.send(
       `${message.author}, wrong number — expected **${expected}**. Counter has been reset, the next number should be **1**`,
     );
-    message.react('❌').catch(() => {});
+    message.react("❌").catch(() => {});
     return;
   } catch (err) {
-    console.error('Counting handler error:', err);
+    console.error("Counting handler error:", err);
   }
 };

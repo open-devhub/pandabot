@@ -4,9 +4,9 @@ const {
   ApplicationCommandOptionType,
   EmbedBuilder,
   PermissionFlagsBits,
-} = require('discord.js');
-const { serverConfig } = require('../../../config.json');
-const { getDocument } = require('../../utils/firestore');
+} = require("discord.js");
+const { serverConfig } = require("../../../config.json");
+const { getDocument } = require("../../utils/firestore");
 
 module.exports = {
   /**
@@ -16,7 +16,7 @@ module.exports = {
   callback: async (client, interaction) => {
     await interaction.deferReply();
 
-    const targetUser = interaction.options.getUser('target-user');
+    const targetUser = interaction.options.getUser("target-user");
     let member = null;
     if (targetUser) {
       try {
@@ -28,20 +28,20 @@ module.exports = {
 
     if (!member) {
       await interaction.editReply({
-        content: 'Could not find that member in the guild.',
+        content: "Could not find that member in the guild.",
       });
       return;
     }
 
-    const warnDoc = await getDocument('warns', member.id);
+    const warnDoc = await getDocument("warns", member.id);
     let warns = [];
     if (warnDoc.exists()) {
       warns = warnDoc.data().warns || [];
     }
 
     const fields = [
-      { name: 'User', value: `${member}`, inline: true },
-      { name: 'Warning Count', value: `${warns.length}`, inline: true },
+      { name: "User", value: `${member}`, inline: true },
+      { name: "Warning Count", value: `${warns.length}`, inline: true },
     ];
 
     warns.forEach((warn, index) => {
@@ -52,7 +52,7 @@ module.exports = {
     });
 
     const embed = new EmbedBuilder()
-      .setTitle('User Warnings')
+      .setTitle("User Warnings")
       .addFields(...fields)
       .setFooter({ text: `requested by ${interaction.user.tag}` })
       .setTimestamp()
@@ -60,12 +60,12 @@ module.exports = {
 
     return interaction.editReply({ embeds: [embed] });
   },
-  name: 'warnings',
-  description: 'Display the number of warns a user has',
+  name: "warnings",
+  description: "Display the number of warns a user has",
   options: [
     {
-      name: 'target-user',
-      description: 'The user whose warnings you want to check.',
+      name: "target-user",
+      description: "The user whose warnings you want to check.",
       type: ApplicationCommandOptionType.User,
       required: true,
     },

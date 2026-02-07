@@ -1,10 +1,10 @@
-const { PermissionFlagsBits, EmbedBuilder } = require('discord.js');
-const { serverConfig } = require('../../../config.json');
-const { counts } = require('../../states/counting');
+const { PermissionFlagsBits, EmbedBuilder } = require("discord.js");
+const { serverConfig } = require("../../../config.json");
+const { counts } = require("../../states/counting");
 
 module.exports = {
-  name: 'setcount',
-  description: 'Sets the counting channel count.',
+  name: "setcount",
+  description: "Sets the counting channel count.",
   permissionsRequired: [PermissionFlagsBits.Administrator],
   async callback(client, message, args) {
     try {
@@ -18,7 +18,7 @@ module.exports = {
       });
 
       const embed = new EmbedBuilder()
-        .setTitle('Counter Updated')
+        .setTitle("Counter Updated")
         .setDescription(
           `The counter has been set to **${args[0]}**.\nNext number should be **${
             parseInt(args[0], 10) + 1
@@ -28,7 +28,7 @@ module.exports = {
 
       await message.reply({ embeds: [embed], ephemeral: false });
     } catch (err) {
-      console.error('Error setting count:', err);
+      console.error("Error setting count:", err);
     }
   },
 };

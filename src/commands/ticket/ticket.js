@@ -8,10 +8,10 @@ const {
   ButtonStyle,
   ComponentType,
   EmbedBuilder,
-} = require('discord.js');
+} = require("discord.js");
 
-const { serverConfig } = require('../../../config.json');
-const buildModal = require('../../utils/buildModal');
+const { serverConfig } = require("../../../config.json");
+const buildModal = require("../../utils/buildModal");
 
 module.exports = {
   /**
@@ -36,78 +36,78 @@ You’ll be guided through a simple form to explain your reason. I will handle t
 
     const selectMenu = [
       {
-        label: '🧩 General Support',
-        value: 'support',
+        label: "🧩 General Support",
+        value: "support",
         fields: [
           {
-            customId: 'reason',
-            label: 'What do you need help with?',
-            style: 'PARAGRAPH',
-            placeholder: 'Explain what you need help with',
+            customId: "reason",
+            label: "What do you need help with?",
+            style: "PARAGRAPH",
+            placeholder: "Explain what you need help with",
             required: true,
             maxLength: 1024,
           },
         ],
       },
       {
-        label: '🎭 Request Unban / Unmute',
-        value: 'appeal',
+        label: "🎭 Request Unban / Unmute",
+        value: "appeal",
         fields: [
           {
-            customId: 'reason',
-            label: 'Reason',
-            style: 'PARAGRAPH',
-            placeholder: 'Explain why you are requesting unban/unmute',
+            customId: "reason",
+            label: "Reason",
+            style: "PARAGRAPH",
+            placeholder: "Explain why you are requesting unban/unmute",
             required: true,
             maxLength: 1024,
           },
         ],
       },
       {
-        label: '🚨 Report User',
-        value: 'report',
+        label: "🚨 Report User",
+        value: "report",
         fields: [
           {
-            customId: 'reason',
-            label: 'Who are you reporting and why?',
-            style: 'PARAGRAPH',
-            placeholder: 'Provide details about the user you are reporting',
+            customId: "reason",
+            label: "Who are you reporting and why?",
+            style: "PARAGRAPH",
+            placeholder: "Provide details about the user you are reporting",
             required: true,
             maxLength: 1024,
           },
         ],
       },
       {
-        label: '⚒️ Apply For Staff',
-        value: 'staff',
+        label: "⚒️ Apply For Staff",
+        value: "staff",
         fields: [
           {
-            customId: 'reason',
-            label: 'Why do you want to join the staff team?',
-            style: 'PARAGRAPH',
-            placeholder: 'Explain why you want to join the staff team',
+            customId: "reason",
+            label: "Why do you want to join the staff team?",
+            style: "PARAGRAPH",
+            placeholder: "Explain why you want to join the staff team",
             required: true,
             maxLength: 1024,
           },
           {
-            customId: 'experience',
-            label: 'Do you have any prior moderation experience?',
-            style: 'PARAGRAPH',
-            placeholder: 'Describe any prior moderation experience you have',
+            customId: "experience",
+            label: "Do you have any prior moderation experience?",
+            style: "PARAGRAPH",
+            placeholder: "Describe any prior moderation experience you have",
             required: false,
             maxLength: 1024,
           },
         ],
       },
       {
-        label: '📝 Other',
-        value: 'other',
+        label: "📝 Other",
+        value: "other",
         fields: [
           {
-            customId: 'reason',
-            label: 'Reason',
-            style: 'PARAGRAPH',
-            placeholder: 'Explain why you are opening this ticket',
+            customId: "reason",
+            label: "Reason",
+            style: "PARAGRAPH",
+            placeholder: "Explain why you are opening this ticket",
             required: true,
             maxLength: 1024,
           },
@@ -116,8 +116,8 @@ You’ll be guided through a simple form to explain your reason. I will handle t
     ];
 
     const select = new StringSelectMenuBuilder()
-      .setCustomId('ticket_type_select')
-      .setPlaceholder('Select ticket type')
+      .setCustomId("ticket_type_select")
+      .setPlaceholder("Select ticket type")
       .addOptions(
         selectMenu.map(
           (option) =>
@@ -131,7 +131,7 @@ You’ll be guided through a simple form to explain your reason. I will handle t
     const row = new ActionRowBuilder().addComponents(select);
 
     const embed = new EmbedBuilder()
-      .setTitle('🎫 Tickets')
+      .setTitle("🎫 Tickets")
       .setDescription(embedContent);
 
     await interaction.deferReply({ ephemeral: true });
@@ -142,7 +142,7 @@ You’ll be guided through a simple form to explain your reason. I will handle t
     });
 
     await interaction.editReply({
-      content: 'Ticketing system has been set up in this channel.',
+      content: "Ticketing system has been set up in this channel.",
     });
 
     const collector = message.createMessageComponentCollector({
@@ -150,7 +150,7 @@ You’ll be guided through a simple form to explain your reason. I will handle t
       time: 0,
     });
 
-    collector.on('collect', async (selectInteraction) => {
+    collector.on("collect", async (selectInteraction) => {
       if (selectInteraction.user.bot) return;
       const ticketType = selectInteraction.values[0];
       const selectedOption = selectMenu.find(
@@ -161,16 +161,16 @@ You’ll be guided through a simple form to explain your reason. I will handle t
       const modalId = `ticket_modal_${selectInteraction.user.id}_${Date.now()}`;
       const modal = buildModal(client, {
         customId: modalId,
-        title: 'Open a Ticket',
+        title: "Open a Ticket",
         fields: selectedOption
           ? selectedOption.fields
           : [
               {
-                customId: 'reason',
-                label: 'Reason',
-                style: 'PARAGRAPH',
+                customId: "reason",
+                label: "Reason",
+                style: "PARAGRAPH",
                 placeholder:
-                  'Explain why you are opening this ticket (max 1024 chars)',
+                  "Explain why you are opening this ticket (max 1024 chars)",
                 required: true,
                 maxLength: 1024,
               },
@@ -180,9 +180,9 @@ You’ll be guided through a simple form to explain your reason. I will handle t
       try {
         await selectInteraction.showModal(modal);
       } catch (err) {
-        console.error('Failed to show modal:', err);
+        console.error("Failed to show modal:", err);
         await selectInteraction.reply({
-          content: 'Something went wrong showing the form. Please try again.',
+          content: "Something went wrong showing the form. Please try again.",
           ephemeral: true,
         });
         return;
@@ -196,19 +196,19 @@ You’ll be guided through a simple form to explain your reason. I will handle t
           time: 300000,
         });
       } catch (e) {
-        console.error('Modal submit error or timeout:', e);
+        console.error("Modal submit error or timeout:", e);
         await selectInteraction.followUp({
-          content: 'You did not submit the ticket form in time.',
+          content: "You did not submit the ticket form in time.",
           ephemeral: true,
         });
         return;
       }
 
-      const reason = modalSubmit.fields.getTextInputValue('reason');
+      const reason = modalSubmit.fields.getTextInputValue("reason");
 
       const safeName = `${ticketLabel}-${selectInteraction.user.username
         .toLowerCase()
-        .replace(/[^a-z0-9-_]/g, '')}`.slice(0, 90);
+        .replace(/[^a-z0-9-_]/g, "")}`.slice(0, 90);
 
       const overwrites = [
         {
@@ -247,9 +247,9 @@ You’ll be guided through a simple form to explain your reason. I will handle t
           permissionOverwrites: overwrites,
         });
       } catch (err) {
-        console.error('Failed creating ticket channel:', err);
+        console.error("Failed creating ticket channel:", err);
         await modalSubmit.reply({
-          content: 'Failed to create ticket channel. Please contact an admin.',
+          content: "Failed to create ticket channel. Please contact an admin.",
           ephemeral: true,
         });
         return;
@@ -257,22 +257,22 @@ You’ll be guided through a simple form to explain your reason. I will handle t
 
       const today = new Date();
       const ticketEmbed = new EmbedBuilder()
-        .setTitle('Ticket Created')
+        .setTitle("Ticket Created")
         .addFields(
           {
-            name: 'By',
+            name: "By",
             value: selectInteraction.user.toString(),
             inline: true,
           },
-          { name: 'Type', value: selectedOption.label, inline: true },
+          { name: "Type", value: selectedOption.label, inline: true },
           {
-            name: 'Created At',
+            name: "Created At",
             value: new Date().toLocaleString(),
             inline: true,
           },
           {
-            name: 'Reason',
-            value: reason || 'No reason provided',
+            name: "Reason",
+            value: reason || "No reason provided",
             inline: false,
           },
         )
@@ -283,13 +283,13 @@ You’ll be guided through a simple form to explain your reason. I will handle t
         });
 
       const closeButton = new ButtonBuilder()
-        .setCustomId('close_ticket')
-        .setLabel('Close Ticket')
+        .setCustomId("close_ticket")
+        .setLabel("Close Ticket")
         .setStyle(ButtonStyle.Danger);
       const actionRow = new ActionRowBuilder().addComponents(closeButton);
 
       const posted = await ticketChannel.send({
-        content: '@everyone',
+        content: "@everyone",
         embeds: [ticketEmbed],
         components: [actionRow],
       });
@@ -309,8 +309,8 @@ You’ll be guided through a simple form to explain your reason. I will handle t
         time: 0,
       });
 
-      buttonCollector.on('collect', async (i) => {
-        if (i.customId !== 'close_ticket') return;
+      buttonCollector.on("collect", async (i) => {
+        if (i.customId !== "close_ticket") return;
 
         const member = i.member;
         const isOpener = i.user.id === selectInteraction.user.id;
@@ -322,7 +322,7 @@ You’ll be guided through a simple form to explain your reason. I will handle t
 
         if (!isOpener && !isModerator && !isAdmin) {
           await i.reply({
-            content: 'You are not allowed to close this ticket.',
+            content: "You are not allowed to close this ticket.",
             ephemeral: true,
           });
           return;
@@ -331,13 +331,13 @@ You’ll be guided through a simple form to explain your reason. I will handle t
         const closeModalId = `close_ticket_modal_${i.user.id}_${Date.now()}`;
         const closeModal = buildModal(client, {
           customId: closeModalId,
-          title: 'Close Ticket',
+          title: "Close Ticket",
           fields: [
             {
-              customId: 'reason',
-              label: 'Reason',
-              style: 'PARAGRAPH',
-              placeholder: 'Explain why this ticket is being closed (optional)',
+              customId: "reason",
+              label: "Reason",
+              style: "PARAGRAPH",
+              placeholder: "Explain why this ticket is being closed (optional)",
               required: false,
               maxLength: 1024,
             },
@@ -347,10 +347,10 @@ You’ll be guided through a simple form to explain your reason. I will handle t
         try {
           await i.showModal(closeModal);
         } catch (err) {
-          console.error('Failed to show close modal:', err);
+          console.error("Failed to show close modal:", err);
           await i
             .reply({
-              content: 'Failed to open close form. Please try again.',
+              content: "Failed to open close form. Please try again.",
               ephemeral: true,
             })
             .catch(() => {});
@@ -365,10 +365,10 @@ You’ll be guided through a simple form to explain your reason. I will handle t
             time: 300000,
           });
         } catch (err) {
-          console.error('Close modal submit error or timeout:', err);
+          console.error("Close modal submit error or timeout:", err);
           await i
             .followUp({
-              content: 'You did not submit the close form in time.',
+              content: "You did not submit the close form in time.",
               ephemeral: true,
             })
             .catch(() => {});
@@ -376,29 +376,29 @@ You’ll be guided through a simple form to explain your reason. I will handle t
         }
 
         const closeReason =
-          closeSubmit.fields.getTextInputValue('reason') || '';
+          closeSubmit.fields.getTextInputValue("reason") || "";
 
         await closeSubmit
-          .reply({ content: 'Closing ticket...', ephemeral: true })
+          .reply({ content: "Closing ticket...", ephemeral: true })
           .catch(() => {});
         try {
           await ticketChannel.delete(`Ticket closed by ${i.user.tag}`);
           const dmContent = new EmbedBuilder()
-            .setTitle('Ticket Closed')
+            .setTitle("Ticket Closed")
             .setDescription(
               `Your ticket "${safeName}" has been closed. If you have further questions, feel free to open a new ticket.`,
             )
             .setFields(
-              { name: 'Type', value: selectedOption.label, inline: true },
-              { name: 'Closed By', value: i.user.toString(), inline: true },
+              { name: "Type", value: selectedOption.label, inline: true },
+              { name: "Closed By", value: i.user.toString(), inline: true },
               {
-                name: 'Closed At',
+                name: "Closed At",
                 value: new Date().toLocaleString(),
                 inline: true,
               },
               {
-                name: 'Reason',
-                value: closeReason || 'No reason provided',
+                name: "Reason",
+                value: closeReason || "No reason provided",
                 inline: false,
               },
             )
@@ -409,13 +409,13 @@ You’ll be guided through a simple form to explain your reason. I will handle t
             .send({ embeds: [dmContent] })
             .catch(() => {});
         } catch (e) {
-          console.error('Failed to delete ticket channel:', e);
+          console.error("Failed to delete ticket channel:", e);
         }
       });
     });
   },
 
-  name: 'ticket',
-  description: 'Send the ticketing system setup message',
+  name: "ticket",
+  description: "Send the ticketing system setup message",
   permissionsRequired: [PermissionFlagsBits.Administrator],
 };

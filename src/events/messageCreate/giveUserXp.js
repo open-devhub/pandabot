@@ -1,7 +1,7 @@
-const { Client, Message } = require('discord.js');
-const { serverConfig } = require('../../../config.json');
-const calculateLevelXp = require('../../utils/calculateLevelXp');
-const Level = require('../../models/Level');
+const { Client, Message } = require("discord.js");
+const { serverConfig } = require("../../../config.json");
+const calculateLevelXp = require("../../utils/calculateLevelXp");
+const Level = require("../../models/Level");
 const cooldowns = new Set();
 
 function getHybridXp(min, max, messageContent) {

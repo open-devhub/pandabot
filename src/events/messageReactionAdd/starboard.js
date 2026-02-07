@@ -1,5 +1,5 @@
-const { serverConfig } = require('../../../config.json');
-const { EmbedBuilder } = require('discord.js');
+const { serverConfig } = require("../../../config.json");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = async (client, reaction) => {
   try {
@@ -11,23 +11,23 @@ module.exports = async (client, reaction) => {
     if (message.author?.bot) return;
 
     const allowedEmojis = [
-      '⭐',
-      '🌟',
-      '💀',
-      '🤣',
-      '😂',
-      '❤️',
-      '😍',
-      '😻',
-      '😹',
-      '🔥',
-      '👏',
-      '😎',
-      '🤯',
-      '💯',
-      '😱',
-      '🤔',
-      '🤩',
+      "⭐",
+      "🌟",
+      "💀",
+      "🤣",
+      "😂",
+      "❤️",
+      "😍",
+      "😻",
+      "😹",
+      "🔥",
+      "👏",
+      "😎",
+      "🤯",
+      "💯",
+      "😱",
+      "🤔",
+      "🤩",
     ];
 
     const { starboardChannel, starboardExclude } = serverConfig;
@@ -60,23 +60,23 @@ module.exports = async (client, reaction) => {
       })
       .setDescription(
         `**${chosen.emoji.toString()} ${chosen.count}**\n` +
-          `${message.content ? `> ${message.content}` : '> *No text message*'}`,
+          `${message.content ? `> ${message.content}` : "> *No text message*"}`,
       )
       .addFields(
-        { name: 'Author', value: `<@${message.author.id}>`, inline: true },
-        { name: 'Channel', value: `<#${message.channel.id}>`, inline: true },
-        { name: 'Jump to message', value: `[Click here](${message.url})` },
+        { name: "Author", value: `<@${message.author.id}>`, inline: true },
+        { name: "Channel", value: `<#${message.channel.id}>`, inline: true },
+        { name: "Jump to message", value: `[Click here](${message.url})` },
       )
       .setFooter({ text: `${message.id}` })
       .setTimestamp(message.createdAt);
 
     if (message.attachments.size > 0) {
       const attachment = message.attachments.first();
-      if (attachment.contentType?.startsWith('image')) {
+      if (attachment.contentType?.startsWith("image")) {
         embed.setImage(attachment.url);
       } else {
         embed.addFields({
-          name: 'Attachment',
+          name: "Attachment",
           value: `[Download File](${attachment.url})`,
         });
       }
@@ -85,6 +85,6 @@ module.exports = async (client, reaction) => {
     const sent = await channel.send({ embeds: [embed] });
     await sent.react(chosen.emoji.toString());
   } catch (err) {
-    console.error('Starboard error:', err);
+    console.error("Starboard error:", err);
   }
 };

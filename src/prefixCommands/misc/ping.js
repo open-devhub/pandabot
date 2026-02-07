@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'ping',
-  description: 'Pong!',
+  name: "ping",
+  description: "Pong!",
   callback(client, message, args) {
     try {
       const ping = Date.now() - message.createdTimestamp;

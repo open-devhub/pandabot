@@ -1,7 +1,7 @@
-const { Client } = require('discord.js');
-const calculateLevelXp = require('../../utils/calculateLevelXp');
-const Level = require('../../models/Level');
-const sendEmbed = require('../../utils/sendEmbed');
+const { Client } = require("discord.js");
+const calculateLevelXp = require("../../utils/calculateLevelXp");
+const Level = require("../../models/Level");
+const sendEmbed = require("../../utils/sendEmbed");
 
 module.exports = {
   /**
@@ -10,14 +10,14 @@ module.exports = {
    * */
   callback: async (client, interaction) => {
     if (!interaction.inGuild()) {
-      interaction.reply('You can only run this command inside a server.');
+      interaction.reply("You can only run this command inside a server.");
       return;
     }
     await interaction.deferReply();
 
-    let allLevels = await Level.find().select('-_id userId level xp');
+    let allLevels = await Level.find().select("-_id userId level xp");
     if (allLevels.length === 0) {
-      interaction.editReply('No one has any levels yet in this server.');
+      interaction.editReply("No one has any levels yet in this server.");
       return;
     }
     allLevels.sort((a, b) => {
@@ -42,20 +42,20 @@ module.exports = {
             t.xp
           }/${needed} XP)`;
         }
-      })
+      }),
     );
 
     sendEmbed({
       interaction,
-      title: 'Leaderboard',
-      description: entries.join('\n'),
-      color: '#5865F2',
+      title: "Leaderboard",
+      description: entries.join("\n"),
+      color: "#5865F2",
       footer: {
         text: `Requested by ${interaction.user.tag}`,
         iconURL: interaction.user.displayAvatarURL({ size: 64 }),
       },
     });
   },
-  name: 'leaderboard',
-  description: 'Shows top levels in the server.',
+  name: "leaderboard",
+  description: "Shows top levels in the server.",
 };

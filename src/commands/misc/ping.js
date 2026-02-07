@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'ping',
-  description: 'Replies with the bot ping!',
+  name: "ping",
+  description: "Replies with the bot ping!",
 
   callback: async (client, interaction) => {
     try {
@@ -14,7 +14,7 @@ module.exports = {
         `Pong! Client ${ping}ms | Websocket: ${client.ws.ping}ms`,
       );
     } catch (err) {
-      console.error('Ping Command Error:', err);
+      console.error("Ping Command Error:", err);
     }
   },
 };

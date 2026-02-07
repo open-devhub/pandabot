@@ -4,9 +4,9 @@ const {
   ApplicationCommandOptionType,
   PermissionFlagsBits,
   EmbedBuilder,
-} = require('discord.js');
-const { serverConfig } = require('../../../config.json');
-const { updateDocument, getDocument } = require('../../utils/firestore');
+} = require("discord.js");
+const { serverConfig } = require("../../../config.json");
+const { updateDocument, getDocument } = require("../../utils/firestore");
 
 module.exports = {
   /**
@@ -14,7 +14,7 @@ module.exports = {
    * @param {Interaction} interaction
    */
   callback: async (client, interaction) => {
-    const optMember = interaction.options.getMember('target-user');
+    const optMember = interaction.options.getMember("target-user");
     if (!optMember) {
       return interaction.reply({
         content: "That user doesn't exist in this server.",
@@ -26,15 +26,15 @@ module.exports = {
     );
     if (!optMember.roles.cache.has(suspendedRole.id)) {
       return interaction.reply({
-        content: 'This user is not suspended.',
+        content: "This user is not suspended.",
         ephemeral: true,
       });
     }
     // get current suspension from firestore from `suspensions` collection
-    const suspensionDoc = await getDocument('suspensions', optMember.id);
+    const suspensionDoc = await getDocument("suspensions", optMember.id);
     if (!suspensionDoc.exists()) {
       return interaction.reply({
-        content: 'No suspension record found for this user.',
+        content: "No suspension record found for this user.",
         ephemeral: true,
       });
     }
@@ -42,23 +42,23 @@ module.exports = {
 
     if (!suspension || !suspension.moderatorId || !suspension.reason) {
       return interaction.reply({
-        content: 'Suspension record is incomplete or corrupted.',
+        content: "Suspension record is incomplete or corrupted.",
         ephemeral: true,
       });
     }
     const embed = new EmbedBuilder()
       .setTitle(`Suspension Info for ${optMember.user.tag}`)
-      .setColor('Orange')
+      .setColor("Orange")
       .addFields(
-        { name: 'User Suspended', value: `<@${optMember.id}>`, inline: true },
+        { name: "User Suspended", value: `<@${optMember.id}>`, inline: true },
         {
-          name: 'Moderator',
+          name: "Moderator",
           value: `<@${suspension.moderatorId}>`,
           inline: true,
         },
         {
-          name: 'Reason',
-          value: suspension.reason || 'No reason provided',
+          name: "Reason",
+          value: suspension.reason || "No reason provided",
           inline: false,
         },
       )
@@ -66,12 +66,12 @@ module.exports = {
       .setTimestamp();
     return interaction.reply({ embeds: [embed] });
   },
-  name: 'checksuspension',
-  description: 'Check if a user is suspended.',
+  name: "checksuspension",
+  description: "Check if a user is suspended.",
   options: [
     {
-      name: 'target-user',
-      description: 'The user you want to check.',
+      name: "target-user",
+      description: "The user you want to check.",
       type: ApplicationCommandOptionType.Mentionable,
       required: true,
     },

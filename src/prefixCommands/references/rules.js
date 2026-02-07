@@ -1,9 +1,9 @@
-const { serverConfig } = require('../../../config.json');
+const { serverConfig } = require("../../../config.json");
 
 module.exports = {
-  name: 'rules',
-  description: 'Sends link to rule channel',
-  aliases: ['rule', 'communityrules'],
+  name: "rules",
+  description: "Sends link to rule channel",
+  aliases: ["rule", "communityrules"],
   callback: async (client, message, args) => {
     try {
       const rulesChannel = serverConfig.rulesChannel;

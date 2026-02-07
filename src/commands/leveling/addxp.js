@@ -4,9 +4,9 @@ const {
   ApplicationCommandOptionType,
   PermissionFlagsBits,
   EmbedBuilder,
-} = require('discord.js');
-const calculateLevelXp = require('../../utils/calculateLevelXp');
-const Level = require('../../models/Level');
+} = require("discord.js");
+const calculateLevelXp = require("../../utils/calculateLevelXp");
+const Level = require("../../models/Level");
 
 module.exports = {
   /**
@@ -16,20 +16,20 @@ module.exports = {
    */
   callback: async (client, interaction) => {
     if (!interaction.inGuild()) {
-      interaction.reply('You can only run this command inside a server.');
+      interaction.reply("You can only run this command inside a server.");
       return;
     }
-    const mentionedUser = interaction.options.getUser('target-user');
+    const mentionedUser = interaction.options.getUser("target-user");
     const targetUserId = mentionedUser?.id || interaction.member.id;
-    const amount = interaction.options.getNumber('amount');
-    const reason = interaction.options.getString('reason');
+    const amount = interaction.options.getNumber("amount");
+    const reason = interaction.options.getString("reason");
     let targetMember;
     try {
       targetMember = await interaction.guild.members.fetch(targetUserId);
     } catch (err) {
       const user =
         mentionedUser || (await interaction.client.users.fetch(targetUserId));
-      targetMember = { user, presence: { status: 'offline' } };
+      targetMember = { user, presence: { status: "offline" } };
     }
     let fetchedLevel = await Level.findOne({ userId: targetUserId });
     if (!fetchedLevel) {
@@ -81,12 +81,12 @@ module.exports = {
 
     await fetchedLevel.save();
     const suggestionEmbed = new EmbedBuilder()
-      .setTitle('XP Added')
+      .setTitle("XP Added")
       .setDescription(`Added ${amount} XP to ${targetMember.user}`)
       .setFields(
-        { name: 'Reason', value: reason, inline: false },
-        { name: 'Level', value: `${fetchedLevel.level}`, inline: true },
-        { name: 'Total XP', value: `${fetchedLevel.xp}`, inline: true },
+        { name: "Reason", value: reason, inline: false },
+        { name: "Level", value: `${fetchedLevel.level}`, inline: true },
+        { name: "Total XP", value: `${fetchedLevel.xp}`, inline: true },
       )
       .setColor(0x5865f2)
       .setTimestamp()
@@ -94,24 +94,24 @@ module.exports = {
 
     return interaction.reply({ embeds: [suggestionEmbed] });
   },
-  name: 'addxp',
-  description: 'Give xp to someone',
+  name: "addxp",
+  description: "Give xp to someone",
   options: [
     {
-      name: 'target-user',
-      description: 'User to give xp to',
+      name: "target-user",
+      description: "User to give xp to",
       type: ApplicationCommandOptionType.Mentionable,
       required: true,
     },
     {
-      name: 'amount',
-      description: 'Amount of xp to add',
+      name: "amount",
+      description: "Amount of xp to add",
       type: ApplicationCommandOptionType.Number,
       required: true,
     },
     {
-      name: 'reason',
-      description: 'Reason for adding xp',
+      name: "reason",
+      description: "Reason for adding xp",
       type: ApplicationCommandOptionType.String,
       required: true,
     },

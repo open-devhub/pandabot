@@ -4,8 +4,8 @@ const {
   ApplicationCommandOptionType,
   EmbedBuilder,
   PermissionFlagsBits,
-} = require('discord.js');
-const { serverConfig } = require('../../../config.json');
+} = require("discord.js");
+const { serverConfig } = require("../../../config.json");
 
 module.exports = {
   /**
@@ -13,20 +13,20 @@ module.exports = {
    * @param {Interaction} interaction
    */
   callback: async (client, interaction) => {
-    const optMember = interaction.options.getMember('target-user');
-    const optUser = interaction.options.getUser('target-user');
+    const optMember = interaction.options.getMember("target-user");
+    const optUser = interaction.options.getUser("target-user");
     let targetUser = optMember;
 
     if (!targetUser && optUser) {
       try {
         targetUser = await interaction.guild.members.fetch(optUser.id);
       } catch (err) {
-        console.error('Failed to fetch member:', err);
+        console.error("Failed to fetch member:", err);
       }
     }
 
     const reason =
-      interaction.options.getString('reason') || 'No reason provided';
+      interaction.options.getString("reason") || "No reason provided";
 
     await interaction.deferReply({ ephemeral: true });
 
@@ -35,7 +35,7 @@ module.exports = {
     }
 
     if (targetUser.id === interaction.guild.ownerId) {
-      return interaction.editReply('Cannot ban the server owner.');
+      return interaction.editReply("Cannot ban the server owner.");
     }
 
     const targetUserRolePosition = targetUser.roles.highest.position;
@@ -44,13 +44,13 @@ module.exports = {
 
     if (targetUserRolePosition >= requestUserRolePosition) {
       return interaction.editReply(
-        "You can't ban that user because they have the same/higher role than you."
+        "You can't ban that user because they have the same/higher role than you.",
       );
     }
 
     if (targetUserRolePosition >= botRolePosition) {
       return interaction.editReply(
-        "I can't ban that user because they have the same/higher role than me."
+        "I can't ban that user because they have the same/higher role than me.",
       );
     }
 
@@ -58,23 +58,30 @@ module.exports = {
       await targetUser.ban({ reason });
 
       const embed = new EmbedBuilder()
-        .setTitle('Banned User')
+        .setTitle("Banned User")
         .setColor(0x5865f2)
         .addFields(
-          { name: 'User', value: targetUser.toString(), inline: true },
-          { name: 'Moderator', value: interaction.user.toString(), inline: true },
-          { name: 'Reason', value: reason }
+          { name: "User", value: targetUser.toString(), inline: true },
+          {
+            name: "Moderator",
+            value: interaction.user.toString(),
+            inline: true,
+          },
+          { name: "Reason", value: reason },
         )
         .setThumbnail(targetUser.user.displayAvatarURL({ size: 1024 }))
         .setTimestamp();
 
-      const logChannel =
-        interaction.guild.channels.cache.get(serverConfig.botCommandsChannel);
+      const logChannel = interaction.guild.channels.cache.get(
+        serverConfig.botCommandsChannel,
+      );
 
       if (logChannel) {
         await logChannel.send({ embeds: [embed] });
       } else {
-        console.warn('Log channel not found, sending embed in current channel.');
+        console.warn(
+          "Log channel not found, sending embed in current channel.",
+        );
         await interaction.channel.send({ embeds: [embed] });
       }
 
@@ -84,23 +91,23 @@ module.exports = {
     } catch (error) {
       console.error(`There was an error when banning: ${error}`);
       await interaction.editReply({
-        content: '❌ An error occurred while banning the user.',
+        content: "❌ An error occurred while banning the user.",
       });
     }
   },
 
-  name: 'ban',
-  description: 'Bans a member from this server.',
+  name: "ban",
+  description: "Bans a member from this server.",
   options: [
     {
-      name: 'target-user',
-      description: 'The user you want to ban.',
+      name: "target-user",
+      description: "The user you want to ban.",
       type: ApplicationCommandOptionType.Mentionable,
       required: true,
     },
     {
-      name: 'reason',
-      description: 'The reason you want to ban.',
+      name: "reason",
+      description: "The reason you want to ban.",
       type: ApplicationCommandOptionType.String,
       required: true,
     },

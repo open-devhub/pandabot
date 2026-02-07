@@ -1,11 +1,11 @@
-const { db } = require('../config/firebase.js');
+const { db } = require("../config/firebase.js");
 const {
   doc,
   setDoc,
   getDoc,
   updateDoc,
   deleteDoc,
-} = require('firebase/firestore');
+} = require("firebase/firestore");
 
 function createDocument(collection, documentId, data) {
   const documentRef = doc(db, collection, documentId);

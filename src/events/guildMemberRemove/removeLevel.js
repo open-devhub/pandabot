@@ -1,4 +1,4 @@
-const Level = require('../../models/Level');
+const Level = require("../../models/Level");
 
 module.exports = async (client, member) => {
   if (!member || !member.id) return;
@@ -6,6 +6,6 @@ module.exports = async (client, member) => {
   try {
     const deleted = await Level.findOneAndDelete({ userId: member.id });
   } catch (err) {
-    console.error('Error removing level document on guildMemberRemove:', err);
+    console.error("Error removing level document on guildMemberRemove:", err);
   }
 };

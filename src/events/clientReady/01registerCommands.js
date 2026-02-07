@@ -1,18 +1,18 @@
-const { guildId } = require('../../../config.json');
-const { ApplicationCommandType } = require('discord.js');
-const areCommandsDifferent = require('../../utils/areCommandsDifferent');
-const getApplicationCommands = require('../../utils/getApplicationCommands');
-const getLocalCommands = require('../../utils/getLocalCommands');
-const getAllFiles = require('../../utils/getAllFiles');
-const path = require('path');
+const { guildId } = require("../../../config.json");
+const { ApplicationCommandType } = require("discord.js");
+const areCommandsDifferent = require("../../utils/areCommandsDifferent");
+const getApplicationCommands = require("../../utils/getApplicationCommands");
+const getLocalCommands = require("../../utils/getLocalCommands");
+const getAllFiles = require("../../utils/getAllFiles");
+const path = require("path");
 
 module.exports = async (client) => {
   try {
     const localCommands = getLocalCommands();
     const contextMenuCommands = [];
     const contextMenuCategories = getAllFiles(
-      path.join(__dirname, '..', '..', 'contextMenus'),
-      true
+      path.join(__dirname, "..", "..", "contextMenus"),
+      true,
     );
 
     for (const contextMenuCategory of contextMenuCategories) {
@@ -31,7 +31,7 @@ module.exports = async (client) => {
       const { name, description, options, type } = localCommand;
 
       const existingCommand = await applicationCommands.cache.find(
-        (cmd) => cmd.name === name
+        (cmd) => cmd.name === name,
       );
 
       if (existingCommand) {
@@ -57,7 +57,7 @@ module.exports = async (client) => {
       } else {
         if (localCommand.deleted) {
           console.log(
-            `⏩ Skipping registering command "${name}" as it's set to delete.`
+            `⏩ Skipping registering command "${name}" as it's set to delete.`,
           );
           continue;
         }

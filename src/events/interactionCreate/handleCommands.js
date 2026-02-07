@@ -1,7 +1,7 @@
-const { devs, guildId } = require('../../../config.json');
-const getLocalCommands = require('../../utils/getLocalCommands');
-const getAllFiles = require('../../utils/getAllFiles');
-const path = require('path');
+const { devs, guildId } = require("../../../config.json");
+const getLocalCommands = require("../../utils/getLocalCommands");
+const getAllFiles = require("../../utils/getAllFiles");
+const path = require("path");
 
 module.exports = async (client, interaction) => {
   if (!interaction.isCommand()) return;
@@ -9,7 +9,7 @@ module.exports = async (client, interaction) => {
   const localCommands = getLocalCommands();
   const contextMenuCommands = [];
   const contextMenuCategories = getAllFiles(
-    path.join(__dirname, '..', '..', 'contextMenus'),
+    path.join(__dirname, "..", "..", "contextMenus"),
     true,
   );
 
@@ -34,7 +34,7 @@ module.exports = async (client, interaction) => {
     if (commandObject.devOnly) {
       if (!devs.includes(interaction.member.id)) {
         interaction.reply({
-          content: 'Only developers are allowed to run this command.',
+          content: "Only developers are allowed to run this command.",
           ephemeral: true,
         });
         return;
@@ -44,7 +44,7 @@ module.exports = async (client, interaction) => {
     if (commandObject.testOnly) {
       if (!(interaction.guild.id === guildId)) {
         interaction.reply({
-          content: 'This command cannot be ran here.',
+          content: "This command cannot be ran here.",
           ephemeral: true,
         });
         return;
@@ -55,7 +55,7 @@ module.exports = async (client, interaction) => {
       for (const permission of commandObject.permissionsRequired) {
         if (!interaction.member.permissions.has(permission)) {
           interaction.reply({
-            content: 'Not enough permissions.',
+            content: "Not enough permissions.",
             ephemeral: true,
           });
           return;

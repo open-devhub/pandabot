@@ -1,5 +1,5 @@
-const path = require('path');
-const getAllFiles = require('../../utils/getAllFiles');
+const path = require("path");
+const getAllFiles = require("../../utils/getAllFiles");
 
 const COOLDOWN_SECONDS = 3;
 const USER_COOLDOWNS = new Map();
@@ -14,7 +14,7 @@ module.exports = async (client, message) => {
   }
 
   try {
-    const prefixes = ['p!', 'P!', 'p/', 'P/', '?'];
+    const prefixes = ["p!", "P!", "p/", "P/", "?"];
     const prefix = prefixes.find((p) => message.content.startsWith(p));
     if (!prefix) return;
 
@@ -29,9 +29,9 @@ module.exports = async (client, message) => {
     const commandName = args.shift().toLowerCase();
     const prefixCommandsPath = path.join(
       __dirname,
-      '..',
-      '..',
-      'prefixCommands',
+      "..",
+      "..",
+      "prefixCommands",
     );
 
     const prefixCommandsCategories = getAllFiles(prefixCommandsPath, true);
@@ -60,13 +60,13 @@ module.exports = async (client, message) => {
     if (commandObject.permissionsRequired?.length) {
       for (const permission of commandObject.permissionsRequired) {
         if (!message.member.permissions.has(permission)) {
-          message.reply('Not enough permissions to run this command.');
+          message.reply("Not enough permissions to run this command.");
           return;
         }
       }
     }
     commandObject.callback(client, message, args);
   } catch (err) {
-    console.error('Prefix Command Error:', err);
+    console.error("Prefix Command Error:", err);
   }
 };

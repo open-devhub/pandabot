@@ -1,5 +1,5 @@
-const { getApp, getApps, initializeApp } = require('firebase/app');
-const { getFirestore } = require('firebase/firestore');
+const { getApp, getApps, initializeApp } = require("firebase/app");
+const { getFirestore } = require("firebase/firestore");
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,

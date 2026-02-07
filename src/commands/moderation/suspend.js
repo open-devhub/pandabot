@@ -4,9 +4,9 @@ const {
   ApplicationCommandOptionType,
   PermissionFlagsBits,
   EmbedBuilder,
-} = require('discord.js');
-const { serverConfig } = require('../../../config.json');
-const { createDocument } = require('../../utils/firestore');
+} = require("discord.js");
+const { serverConfig } = require("../../../config.json");
+const { createDocument } = require("../../utils/firestore");
 
 module.exports = {
   /**
@@ -14,9 +14,9 @@ module.exports = {
    * @param {Interaction} interaction
    */
   callback: async (client, interaction) => {
-    const optMember = interaction.options.getMember('target-user');
+    const optMember = interaction.options.getMember("target-user");
     const reason =
-      interaction.options.getString('reason') || 'No reason provided';
+      interaction.options.getString("reason") || "No reason provided";
     const suspendedRole = interaction.guild.roles.cache.get(
       serverConfig.suspendedRoleId,
     );
@@ -27,7 +27,7 @@ module.exports = {
     }
 
     if (optMember.roles.cache.has(suspendedRole.id)) {
-      return interaction.editReply('This user is already suspended.');
+      return interaction.editReply("This user is already suspended.");
     }
 
     const targetUserRolePosition = optMember.roles.highest.position;
@@ -47,33 +47,33 @@ module.exports = {
     try {
       await optMember.roles.add(suspendedRole, `Suspended: ${reason}`);
     } catch (error) {
-      console.error('Error suspending user:', error);
+      console.error("Error suspending user:", error);
       return interaction.editReply(
-        'There was an error suspending that user. Please try again.',
+        "There was an error suspending that user. Please try again.",
       );
     }
     // get current suspensions from firestore from `suspensions` collection
     // NOTE: Store only the latest suspension, not an array of suspensions
-    await createDocument('suspensions', optMember.id, {
+    await createDocument("suspensions", optMember.id, {
       moderatorId: interaction.user.id,
       reason: reason,
     });
 
     const embed = new EmbedBuilder()
-      .setTitle('User Suspended')
+      .setTitle("User Suspended")
       .setColor(0x5865f2)
       .addFields(
         {
-          name: 'Suspended User',
+          name: "Suspended User",
           value: `${optMember.user}`,
           inline: true,
         },
         {
-          name: 'Moderator',
+          name: "Moderator",
           value: `${interaction.user}`,
           inline: true,
         },
-        { name: 'Reason', value: reason, inline: false },
+        { name: "Reason", value: reason, inline: false },
       )
       .setThumbnail(optMember.user.displayAvatarURL({ size: 1024 }))
       .setTimestamp();
@@ -85,7 +85,7 @@ module.exports = {
     if (logChannel) {
       await logChannel.send({ embeds: [embed] });
     } else {
-      console.warn('Log channel not found, sending embed in current channel.');
+      console.warn("Log channel not found, sending embed in current channel.");
       await interaction.channel.send({ embeds: [embed] });
     }
 
@@ -93,18 +93,18 @@ module.exports = {
       content: `✅ Successfully Suspended **${optMember.user.tag}**`,
     });
   },
-  name: 'suspend',
-  description: 'Suspend a user from the server.',
+  name: "suspend",
+  description: "Suspend a user from the server.",
   options: [
     {
-      name: 'target-user',
-      description: 'The user you want to suspend.',
+      name: "target-user",
+      description: "The user you want to suspend.",
       type: ApplicationCommandOptionType.Mentionable,
       required: true,
     },
     {
-      name: 'reason',
-      description: 'The reason you want to suspend.',
+      name: "reason",
+      description: "The reason you want to suspend.",
       type: ApplicationCommandOptionType.String,
       required: true,
     },
