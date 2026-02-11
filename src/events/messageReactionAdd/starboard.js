@@ -1,5 +1,10 @@
 const { serverConfig } = require("../../../config.json");
-const { EmbedBuilder } = require("discord.js");
+const {
+  EmbedBuilder,
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+} = require("discord.js");
 
 module.exports = async (client, reaction) => {
   try {
@@ -65,7 +70,6 @@ module.exports = async (client, reaction) => {
       .addFields(
         { name: "Author", value: `<@${message.author.id}>`, inline: true },
         { name: "Channel", value: `<#${message.channel.id}>`, inline: true },
-        { name: "Jump to message", value: `[Click here](${message.url})` },
       )
       .setFooter({ text: `${message.id}` })
       .setTimestamp(message.createdAt);
@@ -82,7 +86,18 @@ module.exports = async (client, reaction) => {
       }
     }
 
-    const sent = await channel.send({ embeds: [embed] });
+    const row = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setLabel("Jump to Message")
+        .setStyle(ButtonStyle.Link)
+        .setURL(message.url),
+    );
+
+    const sent = await channel.send({
+      embeds: [embed],
+      components: [row],
+    });
+
     await sent.react(chosen.emoji.toString());
   } catch (err) {
     console.error("Starboard error:", err);
