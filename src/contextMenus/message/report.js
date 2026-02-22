@@ -52,7 +52,7 @@ module.exports = {
             value: `${interaction.user || "Unknown"}`,
             inline: true,
           },
-          { name: "Channel", value: `${message.channel}`, inline: true },
+          { name: "Channel", value: `<#${message.channel.id}>`, inline: true },
           {
             name: "Message",
             value: message.content
@@ -76,7 +76,7 @@ module.exports = {
         components: [row],
       });
       return interaction.reply({
-        content: "Message reported successfully.",
+        content: "Message reported to moderators successfully.",
         ephemeral: true,
       });
     } catch (err) {
