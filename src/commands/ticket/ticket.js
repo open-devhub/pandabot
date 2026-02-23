@@ -30,6 +30,7 @@ Tickets are the best way to get help and ensure moderators can respond quickly. 
 - 🎭 Request Unban / Unmute: If you or a friend need to appeal a ban, mute or suspend, open a ticket and provide the details.
 - 🚨 Report User: If you need to report someone, tickets make sure the moderators see it right away and can investigate properly.
 - ⚒️ Apply For Staff: Interested in joining our moderation team? Use a ticket to submit your application and tell us why you’d be a great fit.
+- 🤝 Partnership: If you're interested in partnering with us, open a ticket and provide details about your proposal.
 - 📝 Other: For any other reasons, open a ticket and explain your situation.
 
 You’ll be guided through a simple form to explain your reason. I will handle the process, create a private channel for your case, and keep everything neat and secure. Thanks for helping us keep the community clean ✨`;
@@ -108,6 +109,20 @@ You’ll be guided through a simple form to explain your reason. I will handle t
             label: "Reason",
             style: "PARAGRAPH",
             placeholder: "Explain why you are opening this ticket",
+            required: true,
+            maxLength: 1024,
+          },
+        ],
+      },
+      {
+        label: "🤝 Partnership",
+        value: "partnership",
+        fields: [
+          {
+            customId: "about",
+            label: "What is your server about?",
+            style: "PARAGRAPH",
+            placeholder: "Provide details about your community",
             required: true,
             maxLength: 1024,
           },
