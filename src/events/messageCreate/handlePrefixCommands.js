@@ -14,7 +14,7 @@ module.exports = async (client, message) => {
   }
 
   try {
-    const prefixes = ["p!", "P!", "p/", "P/", "?"];
+    const prefixes = ["p!", "P!", "p/", "P/"];
     const prefix = prefixes.find((p) => message.content.startsWith(p));
     if (!prefix) return;
 

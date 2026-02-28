@@ -1,7 +1,7 @@
 module.exports = {
   name: "dontasktoask",
   description: "dontasktoask.com",
-  aliases: ["dontasktoaskjustask"],
+  aliases: ["ask", "dontasktoaskjustask"],
   callback: async (client, message, args) => {
     try {
       return message.channel.send("https://dontasktoask.com/");
