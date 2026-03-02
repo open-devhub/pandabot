@@ -37,7 +37,7 @@ module.exports = async (client, reaction) => {
 
     const { starboardChannel, starboardExclude } = serverConfig;
     const { categories, channels } = starboardExclude;
-    const reactionRequired = 5;
+    const reactionRequired = 4;
 
     const channel = message.guild.channels.cache.get(starboardChannel);
     if (!channel) return;
