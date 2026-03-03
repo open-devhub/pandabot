@@ -8,15 +8,21 @@ module.exports = {
   callback: (client, message, args) => {
     try {
       const ticketChannelId = serverConfig.ticketChannel;
-      const ticketInfo = `Tickets are the best way to get help and ensure moderators can respond quickly. Here’s what you can use them for:
-- 🧩 General Support: For questions, technical issues, or anything else you need assistance with, tickets help us track and resolve them.
-- 🎭 Request Unban / Unmute: If you or a friend need to appeal a ban, mute or suspend, open a ticket and provide the details.
-- 🚨 Report User: If you need to report someone, tickets make sure the moderators see it right away and can investigate properly.
-- ⚒️ Apply For Staff: Interested in joining our moderation team? Use a ticket to submit your application and tell us why you’d be a great fit.
-- 🤝 Partnership: If you're interested in partnering with us, open a ticket and provide details about your proposal.
-- 📝 Other: For any other reasons, open a ticket and explain your situation.
+      const ticketInfo = `If you're interested in partnering with us, we welcome you to open a ticket and provide details about your server. Partnerships can include collaborations, cross-promotions, or any mutually beneficial arrangements that align with our community values.
+    To open a partnership ticket, go to <#${ticketChannelId}> and use the dropdown menu to select the "Partnership" option. You’ll be guided through a simple form to provide some information about your server.
 
-To open a ticket, go to <#${ticketChannelId}> and use the dropdown menu to select your ticket type. You’ll be guided through a simple form to explain your reason. I will handle the process, create a private channel for your case, and keep everything neat and secure. Thanks for helping us keep the community clean ✨`;
+**Partnership Requirements:**
+- Atleast 75 members in your server.
+- Your server should be active and have a clear focus or theme.
+- SFW content only. We do not partner with servers that contain NSFW or inappropriate content.
+- Tech/IT related by any means.
+- Have active moderation team and clear rules in place.
+
+**Partnership Benefits:**
+- Increased visibility and exposure for your server within our community.
+- Opportunities for cross-promotion and collaboration on events or activities.
+- Access to our resources and support for mutual growth.
+`;
 
       const embed = new EmbedBuilder()
         .setTitle("📘 Partnership Info")
