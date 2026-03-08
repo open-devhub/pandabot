@@ -188,7 +188,6 @@ module.exports = async (client, message) => {
         if (Date.now() - lastPing > MOD_PING_COOLDOWN_MS) {
           modPingCooldowns.set(userKey, Date.now());
           await modLogChannel.send({
-            content: `<@&${serverConfig.moderatorRoleId}>`,
             embeds: [embed],
           });
         } else {
