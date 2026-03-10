@@ -60,8 +60,7 @@ module.exports = {
     let modalSubmit;
     try {
       modalSubmit = await interaction.awaitModalSubmit({
-        filter: (m) =>
-          m.user.id === interaction.user.id && m.customId === modalId,
+        filter: (m) => m.user.id === interaction.user.id,
         time: 300000,
       });
     } catch (err) {
