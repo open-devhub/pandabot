@@ -1,6 +1,7 @@
-const { PermissionFlagsBits, EmbedBuilder } = require("discord.js");
-
-const buildModal = require("../../utils/buildModal");
+const {
+  PermissionFlagsBits,
+  ApplicationCommandOptionType,
+} = require("discord.js");
 
 module.exports = {
   /**
