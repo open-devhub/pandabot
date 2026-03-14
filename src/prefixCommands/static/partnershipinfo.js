@@ -8,20 +8,33 @@ module.exports = {
   callback: (client, message, args) => {
     try {
       const ticketChannelId = serverConfig.ticketChannel;
-      const ticketInfo = `If you're interested in partnering with us, we welcome you to open a ticket and provide details about your server. Partnerships can include collaborations, cross-promotions, or any mutually beneficial arrangements that align with our community values.
-    To open a partnership ticket, go to <#${ticketChannelId}> and use the dropdown menu to select the "Partnership" option. You’ll be guided through a simple form to provide some information about your server.
+      const ticketInfo = `If you're interested in partnering with us, feel free to open a ticket and tell us a bit about your server. Partnerships are a great way for communities to support each other through cross-promotion, collaboration, and shared growth within the tech space.
+
+To open a partnership ticket, head over to <#${ticketChannelId}> and select the **“Partnership”** option from the dropdown menu. You’ll be guided through a short form where you can provide details about your server.
 
 **Partnership Requirements:**
-- Atleast 75 members in your server.
-- Your server should be active and have a clear focus or theme.
-- SFW content only. We do not partner with servers that contain NSFW or inappropriate content.
-- Tech/IT related by any means.
-- Have active moderation team and clear rules in place.
+
+- Your server must have **at least 100 members**.
+- The server should be **active**, with regular conversations and community engagement.
+- Your community must be **Tech / IT related** (programming, development, cybersecurity, AI, etc).
+- **SFW only** — servers containing NSFW or inappropriate content will not be considered.
+- **Community must be enabled** on your Discord server.
+- The server should have a **clear purpose or theme** that members can easily understand.
+- Channels should be **well organized with a clean structure**.
+- A **moderation team** should be present to maintain the server.
+- **Server rules must be visible and accessible** to all members.
+- The server must be **at least 2 weeks old**.
+- You must provide a **permanent (non-expiring) invite link**.
+- Your server must have a **partnerships channel** where our partnership message can remain visible.
 
 **Partnership Benefits:**
-- Increased visibility and exposure for your server within our community.
-- Opportunities for cross-promotion and collaboration on events or activities.
-- Access to our resources and support for mutual growth.
+
+- **Cross-promotion** between both communities through partnership channels.
+- Increased **visibility and exposure** for your server within the DevHub community.
+- Opportunities for **community collaborations** such as coding events, hackathons, or learning sessions.
+- Ability to **share announcements or major updates** with our community when relevant.
+- **Mutual support between staff teams**, including communication regarding community issues.
+- Ability to submit **ban requests** to help keep both communities safe.
 `;
 
       const embed = new EmbedBuilder()
