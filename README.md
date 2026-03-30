@@ -8,9 +8,6 @@ It comes packed with features for community management, moderation, and interact
 - **Welcoming System**  
   Greets new members with welcome messages and embeds (both in server and DM).
 
-- **Leveling System**  
-  Reward activity with XP and levels. Add roles for active members.
-
 - **Ticketing System**  
   Easy-to-use support ticket creation and management.
 
@@ -42,4 +39,4 @@ You are free to view, study, modify, and contribute to the code.
 Commercial use, re-hosting, and production deployment are **not allowed**
 without explicit written permission from DevHub.
 
-See the `LICENSE` file for full terms.
+See the [`LICENSE`](https://github.com/open-devhub/pandabot/blob/main/LICENSE) file for full terms.
