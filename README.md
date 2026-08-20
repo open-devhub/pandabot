@@ -81,6 +81,7 @@ Panda keeps DevHub engaging, organized, and fun — with community management, m
    bun dev          # development with watch mode
    ```
 
+> [!TIP]
 > Slash commands are registered automatically on startup. Set `REGISTER_COMMANDS=false` in `.env` to skip registration.
 
 ## 🤝 Contributing
