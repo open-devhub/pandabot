@@ -34,11 +34,11 @@ Panda keeps DevHub engaging, organized, and fun — with community management, m
 
 ## 🛠️ Tech Stack
 
-- **[discord.js](https://discord.js.org)** v14 — Discord API
-- **[Bun](https://bun.sh)** — runtime & package manager
-- **[MongoDB](https://www.mongodb.com)** (Mongoose) — persistent storage
-- **[Firebase](https://firebase.google.com)** — cloud services
-- **[captcha-canvas](https://www.npmjs.com/package/captcha-canvas)** — verification captchas
+- **[discord.js](https://discord.js.org)** v14: Discord API
+- **[Bun](https://bun.sh)**: runtime & package manager
+- **[MongoDB](https://www.mongodb.com)** (Mongoose): persistent storage
+- **[Firebase](https://firebase.google.com)**: cloud services
+- **[captcha-canvas](https://www.npmjs.com/package/captcha-canvas)**: verification captchas
 
 ## 🚀 Getting Started
 
