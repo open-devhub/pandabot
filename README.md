@@ -86,7 +86,7 @@ Panda keeps DevHub engaging, organized, and fun — with community management, m
 
 ## 🤝 Contributing
 
-We welcome contributions! Open an issue or submit a pull request — see [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines and the [Code of Conduct](./CODE_OF_CONDUCT.md).
+We welcome contributions! Open an issue or submit a pull request — see [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guide.
 
 ## 📜 License
 
