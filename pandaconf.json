@@ -1,0 +1,66 @@
+{
+  "modules": {
+    "welcome": {
+      "enabled": true,
+      "dm": true,
+      "channel": "1544104359925653544"
+    },
+
+    "counting": {
+      "enabled": true,
+      "channel": "1544418373004435607"
+    },
+
+    "afk": {
+      "enabled": true
+    },
+
+    "macros": {
+      "enabled": true,
+      "deleteOG": false
+    },
+
+    "suggestion": {
+      "enabled": true,
+      "channel": "1545553520122396692"
+    },
+
+    "tickets": {
+      "enabled": true,
+      "category": "1545828391809192036",
+      "mention": ["1545828854222815302"],
+      "mods": ["1545828854222815302"],
+      "text": "Need help with something or have a question for the staff team? Click the button below to open a private support ticket.\nRules before opening a ticket:\n- Do not ping staff members directly.\n- Clearly describe your issue/question in the popup\n- Impatient or spam behavior will result in a ticket close.",
+      "transcripts": "1546165004879921293"
+    },
+
+    "starboard": {
+      "enabled": true,
+      "channel": "1545528233431138334",
+      "emojis": ["⭐", "💀", "🤣", "😂", "❤️", "😍", "🔥", "💯"],
+      "reactionsRequired": 2,
+      "exclude": {
+        "channels": [],
+        "categories": []
+      }
+    },
+
+    "stickyMessages": {
+      "enabled": true,
+      "messages": {
+        "1545170916965617747": {
+          "content": "Welcome to DevHub! Please introduce yourself by sharing your preferred name/nickname, favorite languages/tools/frameworks, areas of interest, hobbies outside tech, and what you hope to learn or contribute here. We’re excited you’re here!",
+          "react": ["👋", "❤️"]
+        }
+      }
+    }
+  },
+
+  "settings": {
+    "serverId": "1486017257099231282",
+    "prefixes": {
+      "commands": ["p!"],
+      "macros": ["++", "?"]
+    }
+  }
+}
