@@ -3,12 +3,12 @@
     "welcome": {
       "enabled": true,
       "dm": true,
-      "channel": "1544104359925653544"
+      "channel": "1429027697304277173"
     },
 
     "counting": {
       "enabled": true,
-      "channel": "1544418373004435607"
+      "channel": "1433142662978080909"
     },
 
     "afk": {
@@ -22,33 +22,39 @@
 
     "suggestion": {
       "enabled": true,
-      "channel": "1545553520122396692"
+      "channel": "1441645690727039026"
     },
 
     "tickets": {
       "enabled": true,
-      "category": "1545828391809192036",
-      "mention": ["1545828854222815302"],
-      "mods": ["1545828854222815302"],
+      "category": "1431492565760348281",
+      "mention": ["1493986014270717992"],
+      "mods": ["1493986014270717992"],
       "text": "Need help with something or have a question for the staff team? Click the button below to open a private support ticket.\nRules before opening a ticket:\n- Do not ping staff members directly.\n- Clearly describe your issue/question in the popup\n- Impatient or spam behavior will result in a ticket close.",
-      "transcripts": "1546165004879921293"
+      "transcripts": "1492501182164373659"
     },
 
     "starboard": {
       "enabled": true,
-      "channel": "1545528233431138334",
+      "channel": "1457370021700309083",
       "emojis": ["⭐", "💀", "🤣", "😂", "❤️", "😍", "🔥", "💯"],
-      "reactionsRequired": 2,
+      "reactionsRequired": 4,
       "exclude": {
-        "channels": [],
-        "categories": []
+        "channels": ["1429027865957109861"],
+        "categories": [
+          "1429035248754098176",
+          "1484208310998663329",
+          "1532474240480317560",
+          "1431492565760348281",
+          "1444027597364400138"
+        ]
       }
     },
 
     "stickyMessages": {
       "enabled": true,
       "messages": {
-        "1545170916965617747": {
+        "1450859866334695517": {
           "content": "Welcome to DevHub! Please introduce yourself by sharing your preferred name/nickname, favorite languages/tools/frameworks, areas of interest, hobbies outside tech, and what you hope to learn or contribute here. We’re excited you’re here!",
           "react": ["👋", "❤️"]
         }
@@ -61,7 +67,7 @@
   },
 
   "settings": {
-    "serverId": "1486017257099231282",
+    "serverId": "1429026875946172459",
     "prefixes": {
       "commands": ["p!"],
       "macros": ["++", "?"]
