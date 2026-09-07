@@ -1,6 +1,7 @@
 import { Args, Command } from "@sapphire/framework";
 import {
   MessageFlags,
+  PermissionFlagsBits,
   type ChatInputCommandInteraction,
   type Message,
 } from "discord.js";
@@ -16,7 +17,7 @@ export class SetCount extends Command {
     super(context, {
       name: "setcount",
       description: "Set the current count manually",
-      preconditions: ["AdminOnly"],
+      requiredUserPermissions: [PermissionFlagsBits.Administrator],
     });
   }
 

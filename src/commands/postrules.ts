@@ -1,6 +1,6 @@
 import { Command } from "@sapphire/framework";
 import type { Message } from "discord.js";
-import { EmbedBuilder } from "discord.js";
+import { EmbedBuilder, PermissionFlagsBits } from "discord.js";
 import { config } from "../config/app.ts";
 import { colors } from "../constants/colors.ts";
 import rules from "../data/rules.json" with { type: "json" };
@@ -11,7 +11,7 @@ export class PostRules extends Command {
       name: "postrules",
       aliases: ["rules"],
       description: "Server rules",
-      preconditions: ["AdminOnly"],
+      requiredUserPermissions: [PermissionFlagsBits.Administrator],
     });
   }
 

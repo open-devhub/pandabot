@@ -5,6 +5,7 @@ import {
   ButtonBuilder,
   ButtonStyle,
   EmbedBuilder,
+  PermissionFlagsBits,
 } from "discord.js";
 import { config } from "../config/app.ts";
 import { colors } from "../constants/colors.ts";
@@ -16,7 +17,7 @@ export class Tickets extends Command {
       name: "tickets",
       aliases: ["ticket"],
       description: "Post ticket embed",
-      preconditions: ["AdminOnly"],
+      requiredUserPermissions: [PermissionFlagsBits.Administrator],
     });
   }
 

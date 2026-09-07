@@ -1,12 +1,15 @@
 import { Command } from "@sapphire/framework";
-import type { ChatInputCommandInteraction } from "discord.js";
+import {
+  PermissionFlagsBits,
+  type ChatInputCommandInteraction,
+} from "discord.js";
 
 export class SendMessage extends Command {
   public constructor(context: Command.LoaderContext) {
     super(context, {
       name: "sendmsg",
       description: "Send a message as the bot",
-      preconditions: ["AdminOnly"],
+      requiredUserPermissions: [PermissionFlagsBits.Administrator],
     });
   }
 
