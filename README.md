@@ -9,36 +9,30 @@
 [![Runtime: Bun](https://img.shields.io/badge/runtime-Bun-f9f1e1?logo=bun&logoColor=white)](https://bun.sh)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
 
-Panda keeps DevHub engaging, organized, and fun — with community management, moderation, gamification, and a little bit of magic.
+Panda is a [self hostable] discord bot that keeps DevHub engaging, organized, and fun with community management, gamification, and a little bit of magic.
 
 </div>
 
----
-
 ## ✨ Features
 
-| Feature | Description |
-| --- | --- |
-| 👋 **Welcome System** | Greets new members with embeds in the server **and** via DM, plus a sticky introduction message with 👋 reactions. |
-| 🔐 **Captcha Verification** | New members complete a visual captcha (via DM) before gaining full access; suspended members can verify to restore access. |
-| 🎫 **Ticketing System** | Clean support-ticket creation and management with transcripts and an admin log channel. |
-| ⭐ **Starboard** | Messages that reach enough reactions are promoted to the starboard channel. |
-| 💡 **Suggestions** | Collect, queue, vote on, and mark community suggestions as implemented. |
-| 🔢 **Counting Game** | Classic counting-channel game with a per-user count leaderboard, plus reset/set-count tools. |
-| 🧑‍💻 **Profiles** | Custom profiles with bio, stack, GitHub, portfolio, hobbies & badge roles (Admin, Developer, VIP, Bug Hunter, and more). |
-| 😴 **AFK System** | Set an AFK status and get notified when someone pings you. |
-| 📜 **Rule Lookup** | Instantly fetch any rule embed with `p!r<number>`. |
-| 🧰 **Moderation Tools** | Purge, lock/unlock, hide/unhide, slowmode, and a user-report context menu. |
-| ⚡ **Macros** | Quick community macros triggered with the `++` prefix. |
-| 🛠️ **Utility Commands** | Slash + prefix commands: ping, snowflake decoding, DM sending, custom embeds/messages, and more. |
+| Feature              | Description                                                                                                        |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| **Welcome System**   | Greets new members with embeds in the server **and** via DM, plus a sticky introduction message with 👋 reactions. |
+| **Ticketing System** | Clean support-ticket creation and management with transcripts and an admin log channel.                            |
+| **Starboard**        | Messages that reach enough reactions are promoted to the starboard channel.                                        |
+| **Suggestions**      | Collect, queue, vote on, and mark community suggestions as implemented.                                            |
+| **Counting Game**    | Classic counting-channel game with a per-user count leaderboard, plus reset/set-count tools.                       |
+| **AFK System**       | Set an AFK status and get notified when someone pings you.                                                         |
+| **Rule Lookup**      | Instantly fetch any rule embed with `?r<number>`.                                                                  |
+| **Moderation Tools** | Purge, lock/unlock, hide/unhide, slowmode, and a user-report context menu.                                         |
+| **Macros**           | Quick community macros triggered with the `++` prefix.                                                             |
 
 ## 🛠️ Tech Stack
 
+- **[Sapphirejs](https://sapphirejs.dev)**: Discord bot framework
 - **[discord.js](https://discord.js.org)** v14: Discord API
 - **[Bun](https://bun.sh)**: runtime & package manager
-- **[MongoDB](https://www.mongodb.com)** (Mongoose): persistent storage
-- **[Firebase](https://firebase.google.com)**: cloud services
-- **[captcha-canvas](https://www.npmjs.com/package/captcha-canvas)**: verification captchas
+- **[LMDB](https://www.mongodb.com)**: persistent local storage
 
 ## 🚀 Getting Started
 
@@ -46,8 +40,6 @@ Panda keeps DevHub engaging, organized, and fun — with community management, m
 
 - [Bun](https://bun.sh) >= 1.0
 - A [Discord application](https://discord.com/developers/applications) with a bot token
-- MongoDB instance (local or [Atlas](https://www.mongodb.com/atlas))
-- (Optional) Firebase project credentials
 
 ### Setup
 
@@ -72,7 +64,7 @@ Panda keeps DevHub engaging, organized, and fun — with community management, m
    cp .env.example .env
    ```
 
-   Then set your Discord token and MongoDB URI in `.env`.
+   Then set your Discord token in `.env`.
 
 4. **Run the bot**
 
@@ -81,12 +73,11 @@ Panda keeps DevHub engaging, organized, and fun — with community management, m
    bun dev          # development with watch mode
    ```
 
-> [!TIP]
-> Slash commands are registered automatically on startup. Set `REGISTER_COMMANDS=false` in `.env` to skip registration.
-
 ## 🤝 Contributing
 
-We welcome contributions! Open an issue or submit a pull request — see [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guide.
+We welcome contributions! Open an issue or submit a pull request.
+
+Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guide.
 
 ## 📜 License
 

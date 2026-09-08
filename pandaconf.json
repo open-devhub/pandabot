@@ -1,0 +1,76 @@
+{
+  "modules": {
+    "welcome": {
+      "enabled": true,
+      "dm": true,
+      "channel": "1429027697304277173"
+    },
+
+    "counting": {
+      "enabled": true,
+      "channel": "1433142662978080909"
+    },
+
+    "afk": {
+      "enabled": true
+    },
+
+    "macros": {
+      "enabled": true,
+      "deleteOG": false
+    },
+
+    "suggestion": {
+      "enabled": true,
+      "channel": "1441645690727039026"
+    },
+
+    "tickets": {
+      "enabled": true,
+      "category": "1431492565760348281",
+      "mention": ["1493986014270717992"],
+      "mods": ["1493986014270717992"],
+      "text": "Need help with something or have a question for the staff team? Click the button below to open a private support ticket.\nRules before opening a ticket:\n- Do not ping staff members directly.\n- Clearly describe your issue/question in the popup\n- Impatient or spam behavior will result in a ticket close.",
+      "transcripts": "1492501182164373659"
+    },
+
+    "starboard": {
+      "enabled": true,
+      "channel": "1457370021700309083",
+      "emojis": ["⭐", "💀", "🤣", "😂", "❤️", "😍", "🔥", "💯"],
+      "reactionsRequired": 4,
+      "exclude": {
+        "channels": ["1429027865957109861"],
+        "categories": [
+          "1429035248754098176",
+          "1484208310998663329",
+          "1532474240480317560",
+          "1431492565760348281",
+          "1444027597364400138"
+        ]
+      }
+    },
+
+    "stickyMessages": {
+      "enabled": true,
+      "messages": {
+        "1450859866334695517": {
+          "content": "Welcome to DevHub! Please introduce yourself by sharing your preferred name/nickname, favorite languages/tools/frameworks, areas of interest, hobbies outside tech, and what you hope to learn or contribute here. We’re excited you’re here!",
+          "react": ["👋", "❤️"]
+        }
+      }
+    },
+
+    "easterEggs": {
+      "enabled": true
+    }
+  },
+
+  "settings": {
+    "serverId": "1429026875946172459",
+    "prefixes": {
+      "commands": ["p!"],
+      "macros": ["++", "?"]
+    }
+  }
+}

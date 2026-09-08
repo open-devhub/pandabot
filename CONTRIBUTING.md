@@ -32,7 +32,7 @@ We welcome all kinds of contributions, whether it's fixing bugs, adding new feat
 
 - Commit your work with a meaningful message:
   ```bash
-  git commit -m "Add leveling rewards system"
+  git commit -m "feat(tickets): log message conversation on ticket close"
   ```
 - Push your branch to your fork:
   ```bash
@@ -47,13 +47,14 @@ We welcome all kinds of contributions, whether it's fixing bugs, adding new feat
 
 ## 📖 Code of Conduct
 
-By contributing, you agree to uphold our [Looks like the result wasn't safe to show. Let's switch things up and try something else!].
+By contributing, you agree to uphold our [Code Of Conduct](./CODE_OF_CONDUCT.md).
 We expect respectful communication and collaboration.
 
 ## 💡 Suggestions & Ideas
 
 Not a coder or not feeling like it? You can still help by:
 
+- Starring the repo
 - Reporting bugs
 - Suggesting new features
 - Improving documentation
@@ -61,14 +62,10 @@ Not a coder or not feeling like it? You can still help by:
 
 ## 🐼 Recognition
 
-All contributors will be recognized in the project and may receive special roles in the community Discord server.
+All contributors will be recognized by special roles in the community Discord server.
 
 ## 📜 License
 
-By contributing to this project, you agree that:
-
-- Your contributions will be licensed under the **DevHub Source-Available License (DSAL)**
-- DevHub may use, modify, and distribute your contributions as part of Panda Bot
-- You do not gain any ownership, commercial, or hosting rights to Panda Bot by contributing
+Panda Bot is released under the **GPL-3.0** License. See [LICENSE](./LICENSE) for details.
 
 _Thank you for taking time to contribute to Panda Bot ✨_
